@@ -1,56 +1,58 @@
 <html>
-<head>
-    
-    <title> Sudoku Checker Test </title>
-</head>
+    <head>
+        <title> Sudoku Checker Test </title>
+    </head>
 
-<style>
+    <style>
 
-#testA{
+        #testA{
 
-   display:grid;
-   grid-template-columns: repeat(9,11%);
+        display:grid;
+        grid-template-columns: repeat(9,11%);
 
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 10%
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 10%
 
-}
+        }
 
-input{
-    height:60px;
-    text-align: center;
-    font-size: 139%;
-}
+        input{
+            height:60px;
+            text-align: center;
+            font-size: 139%;
+        }
 
-</style>
+    </style>
 
-<body>
+    <body>
+
+        <h1>Sudoku Checker Test</h1>
 
         <div id='testA'>
 
-            
         </div>
 
 
-</body>
+    </body>
 </html>
 
 
 <script>
 
-var MytestA = document.getElementById('testA');
-for(var i=0;i<9;i++){
-    for(var j=0;j<9;j++)
-{
-    var myinput = document.createElement('input')
-        myinput.id = `${i}${j}`
-        var number= Math.ceil(Math.random()*9)
-    myinput.value = number
+    var MytestA = document.getElementById('testA');
+    for(var i=0;i<9;i++)
+    {
+        for(var j=0;j<9;j++)
+        {
+            var myinput = document.createElement('input')
+            myinput.id = `${i}${j}`
+            
+            var number= Math.ceil(Math.random()*9)
+            myinput.value = number
 
-    MytestA.appendChild(myinput)
-}
-}
+            MytestA.appendChild(myinput)
+        }
+    }
 
 </script>
 
