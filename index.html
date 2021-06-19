@@ -1,63 +1,124 @@
 <html>
-<head>
-    
-    <title> Sudoku Checker Test </title>
-</head>
+    <head>
+        
+        <title> Sudoku Checker Test </title>
 
-<style>
+        <style>
 
-#testA{
+        #testA
+        {
 
-   display:grid;
-   grid-template-columns: repeat(9,11%);
+        display:grid;
+        grid-template-columns: repeat(9,11%);
 
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 10%
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 10%
+        }
 
-}
+        input
+        {
+            height:60px;
+            text-align: center;
+            font-size: 139%;
+        }
 
-input
-{
-    height:60px;
-    text-align: center;
-    font-size: 139%;
-}
+        </style>
 
-</style>
+    </head>
 
-<body>
+    <body>
 
-        <div id='testA'>
+            <div id='testA'>
 
-            
-        </div>
+                
+            </div>
 
 
-</body>
+    </body>
 </html>
 
 
-<script>
+<script> 
+window.onload=function ()
+{
+    createGrid();
+}
+var sudoku = [ [], [], [], [], [], [], [], [], [] ]
 
 function createGrid()
 {
-
     var MytestA = document.getElementById('testA');
-    for(var i=0;i<9;i++){
-        for(var j=0;j<9;j++)
+    for(var i=0;i<9;i++)
     {
-        var myinput = document.createElement('input')
-            myinput.id = `${i}${j}`
-            var number= Math.ceil(Math.random()*9)
-        myinput.value = number
+        for(var j=0;j<9;j++)
+        {
+            var myinput = document.createElement('input')
+                myinput.id = `${i}${j}`
+                var number= Math.ceil(Math.random()*9)
 
-        MytestA.appendChild(myinput)
+        }
     }
+
+        myinput.row=i
+        myinput.col=j
+
+    if(isSafe(sudoku, i, j, number))
+    {
+        myinput.value = number
+        myinput.readOnly = true
+    }
+
+    else
+    {
+        number=0
+        myinput.value=''
+    }
+console.log('sudoku:', sudoku)
+    sudoku[i][j]=number
+
+    MytestA.appendChild(myinput)
+    myinput.onInput = function ()
+    {
+        console.log('working')
+    } 
+  
+//console.log('sudoku:', sudoku) 
+
+function isSafe(grid, row, col, num)
+{
+    for(var x=0; x<9; x++)
+    {
+        if(grid[row][x]==num)
+        {
+            return false
+        }
+    }
+
+    for(var y=0;y<9;y++)
+    {
+        if(grid[y][col]==num)
+        {
+            return false
+        }
     }
 
 }
+
+    var startRow = row - (row%3)
+    var startCol = col - (col%3)
+
+    for(var m = 0; m < 3; m++)
+    {
+        for (var n = 0; m < 3; n++)
+        {
+            if(grid[m+startRow][n+startcol] == num)
+            {
+                return false
+            }
+        }
+    }
+        return true
+}
+
 </script>
-
-
-
