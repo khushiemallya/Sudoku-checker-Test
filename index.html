@@ -40,85 +40,110 @@
 
 
 <script> 
-window.onload=function ()
-{
-    createGrid();
-}
-var sudoku = [ [], [], [], [], [], [], [], [], [] ]
 
-function createGrid()
-{
-    var MytestA = document.getElementById('testA');
-    for(var i=0;i<9;i++)
+    var sudoku = [ [], [], [], [], [], [], [], [], [] ]
+
+    function createGrid()
     {
-        for(var j=0;j<9;j++)
+        var MytestA = document.getElementById('testA');
+        
+        for(var i=0;i<9;i++)
         {
-            var myinput = document.createElement('input')
+            for(var j=0;j<9;j++)
+            {
+                var myinput = document.createElement('input')  
                 myinput.id = `${i}${j}`
-                var number= Math.ceil(Math.random()*9)
-
-        }
-    }
-
-        myinput.row=i
-        myinput.col=j
-
-    if(isSafe(sudoku, i, j, number))
-    {
-        myinput.value = number
-        myinput.readOnly = true
-    }
-
-    else
-    {
-        number=0
-        myinput.value=''
-    }
-console.log('sudoku:', sudoku)
-    sudoku[i][j]=number
-
-    MytestA.appendChild(myinput)
-    myinput.onInput = function ()
-    {
-        console.log('working')
-    } 
-  
-//console.log('sudoku:', sudoku) 
-
-function isSafe(grid, row, col, num)
-{
-    for(var x=0; x<9; x++)
-    {
-        if(grid[row][x]==num)
+                    var number= Math.ceil(Math.random()*9)
+                    myinput.row=i
+                    myinput.col=j
+                    if(isSafe(sudoku, i, j, number))
         {
-            return false
+            myinput.value = number
+            myinput.readOnly = true
         }
+
+        else
+        {
+            number=0
+            myinput.value=''
+        }
+
+        sudoku[i][j]=number
+
+        MytestA.appendChild(myinput)
+
+        myinput.oninput = function(e)
+        {
+            checkAnswer(sudoku, e)
+        } 
+    
+        //console.log('sudoku:', sudoku) 
+            }
+        }
+
+        
     }
 
-    for(var y=0;y<9;y++)
+    createGrid()
+
+    function isSafe(grid, row, col, num)
     {
-        if(grid[y][col]==num)
+        for(var x=0; x<9; x++)
         {
-            return false
+            if(grid[row][x]==num)
+            {
+                //showColor('red', id)
+                return false
+            }
         }
-    }
 
-}
-
-    var startRow = row - (row%3)
-    var startCol = col - (col%3)
-
-    for(var m = 0; m < 3; m++)
-    {
-        for (var n = 0; m < 3; n++)
+        for(var y=0;y<9;y++)
         {
-            if(grid[m+startRow][n+startcol] == num)
+            if(grid[y][col]==num)
             {
                 return false
             }
         }
-    }
-        return true
-}
 
+
+    var startRow = row - (row%3)
+    var startCol = col - (col%3)
+
+        for(var m = 0; m < 3; m++)
+        {
+            for (var n = 0; m < 3; n++)
+            {
+                if (grid[m+startRow][n+startCol] == num)
+                {
+                    return false
+                }
+            }
+        }
+            return true
+    }
+    
+
+    function checkAnswer(grid, e)
+    { 
+        var row=e.target.row
+        var col=e.target.col
+        var num=number(e.data)
+        var id=e.target.id
+    }
+
+        function showColor(color, id)
+        {
+            var inp = document.getElementById(id)
+
+                if(color=='red')
+                {
+                    inp.style.backgroundColor='red'
+                }
+
+                else
+                {
+                    inp.style.backgroundColor='green'
+                }
+        }
+    
 </script>
