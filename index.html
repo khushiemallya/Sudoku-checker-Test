@@ -1,0 +1,63 @@
+<html>
+<head>
+    
+    <title> Sudoku Checker Test </title>
+</head>
+
+<style>
+
+#testA{
+
+   display:grid;
+   grid-template-columns: repeat(9,11%);
+
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10%
+
+}
+
+input
+{
+    height:60px;
+    text-align: center;
+    font-size: 139%;
+}
+
+</style>
+
+<body>
+
+        <div id='testA'>
+
+            
+        </div>
+
+
+</body>
+</html>
+
+
+<script>
+
+function createGrid()
+{
+
+    var MytestA = document.getElementById('testA');
+    for(var i=0;i<9;i++){
+        for(var j=0;j<9;j++)
+    {
+        var myinput = document.createElement('input')
+            myinput.id = `${i}${j}`
+            var number= Math.ceil(Math.random()*9)
+        myinput.value = number
+
+        MytestA.appendChild(myinput)
+    }
+    }
+
+}
+</script>
+
+
+
